@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+.env*.local
+.qa-*/
+*.log
+screenshot_*.png
+shot*.png
