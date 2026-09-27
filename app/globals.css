@@ -189,6 +189,7 @@ body:has(.opening .opening-toggle:checked) .site-content{animation:page-two-reve
 /* Page 1 scales as one complete invitation object on portrait screens. */
 @media(max-width:800px){
   .opening .envelope-wrap{width:min(92vw,900px);top:50%}
+  .opening .opening-trigger{top:57%;width:118px;height:118px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
   .opening .invitation-card{width:88%;padding:3.5% 4.5% 5%}
   .opening .invitation-card-heading{height:29%;margin-bottom:3%}
   .opening .invitation-card-heading p{font-size:clamp(5px,1vw,7px)}
@@ -211,6 +212,7 @@ body:has(.opening .opening-toggle:checked) .site-content{animation:page-two-reve
 
 @media(max-width:480px){
   .opening .envelope-wrap{width:94vw}
+  .opening .opening-trigger{top:57%;width:108px;height:108px}
   .opening .invitation-card-heading h1{font-size:clamp(20px,6.4vw,31px)}
   .opening .invitation-card-heading span{font-size:clamp(13px,4vw,19px)}
   .opening .stationery-compact{grid-template-columns:42% 58%;gap:2%}
