@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { MapPin, Volume2, VolumeX } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -97,13 +97,11 @@ function Countdown() {
 
 export default function Home() {
   const [entered, setEntered] = useState(false);
-  const [muted, setMuted] = useState(true);
   useEffect(() => {
     if (new URLSearchParams(window.location.search).has("preview")) setEntered(true);
   }, []);
   return <main style={{ "--floral-overlay": `url("${BASE_PATH}/images/page2-floral-overlay.png")` } as React.CSSProperties}>
     <AnimatePresence>{!entered && <Opening />}</AnimatePresence>
-    <button className="sound" onClick={()=>setMuted(!muted)} aria-label="Toggle sound">{muted ? <VolumeX/> : <Volume2/>}</button>
     <motion.div
       className="site-content is-entered"
       initial={false}
