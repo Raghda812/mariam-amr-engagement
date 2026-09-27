@@ -35,10 +35,12 @@ jobs:
         run: |
           REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
           if [[ "$REPOSITORY_NAME" == "${GITHUB_REPOSITORY_OWNER}.github.io" ]]; then
-            echo "NEXT_PUBLIC_BASE_PATH=" >> "$GITHUB_ENV"
+            BASE_PATH=""
           else
-            echo "NEXT_PUBLIC_BASE_PATH=/$REPOSITORY_NAME" >> "$GITHUB_ENV"
+            BASE_PATH="/$REPOSITORY_NAME"
           fi
+          echo "NEXT_PUBLIC_BASE_PATH=$BASE_PATH" >> "$GITHUB_ENV"
+          echo "NEXT_PUBLIC_SITE_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/" >> "$GITHUB_ENV"
 
       - name: Install dependencies
         run: npm ci
