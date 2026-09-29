@@ -84,7 +84,7 @@ body:has(.opening .opening-toggle:checked) .site-content{animation:page-two-reve
 .site-content .countdown-location>span{display:grid;place-items:center;width:58px;height:58px;color:var(--wine);border:1px solid var(--gold);border-radius:50%}
 .site-content .countdown-location svg{width:23px}
 .site-content .countdown-location small{display:block;margin-bottom:5px;font:600 8px var(--sans);letter-spacing:.2em}
-.site-content .countdown-location b{display:block;font:31px var(--script)}
+.site-content .countdown-location b{display:block;font:700 30px/1.3 var(--sans);letter-spacing:.02em;color:var(--deep)}
 .site-content .countdown-location p{margin:2px 0 0;font:500 11px var(--sans);letter-spacing:.08em}
 .site-content footer{height:145px}
 .site-content footer .monogram{height:54px}

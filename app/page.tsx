@@ -26,7 +26,7 @@ function Opening() {
         <div className="invitation-card-heading">
           <p>Save the date</p>
           <h1>Our Engagement</h1>
-          <span>Amr <i>&amp;</i> Mariam</span>
+          <span>Amro <i>&amp;</i> Mariam</span>
         </div>
         <InvitationStationery compact />
       </div>
@@ -45,7 +45,7 @@ function Opening() {
 }
 
 function Portrait({ className = "" }: { className?: string }) {
-  return <div className={`portrait ${className}`}><Image src={`${BASE_PATH}/images/couple.png`} alt="Rachel and Carter" fill priority sizes="(max-width: 700px) 72vw, 390px" /></div>;
+  return <div className={`portrait ${className}`}><Image src={`${BASE_PATH}/images/couple.png`} alt="Amro and Mariam" fill priority sizes="(max-width: 700px) 72vw, 390px" /></div>;
 }
 
 function Calendar({ month = "June", year = "2027", selected = "12", offset = 2, adorned = false }: { month?: string; year?: string; selected?: string; offset?: number; adorned?: boolean }) {
@@ -60,7 +60,7 @@ function InvitationStationery({ compact = false }: { compact?: boolean }) {
     <div className="date-photo stationery-photo reveal-card reveal-photo">
       <div className="stationery-rings-photo"><Image src={`${BASE_PATH}/images/engagement-rings.png`} alt="Engagement and wedding rings with ivory flowers" fill priority sizes="(max-width: 800px) 90vw, 620px" /></div>
       <div className="date-stamp">SATURDAY<br/><b>3</b><br/>OCTOBER</div>
-      <div className="venue-ticket reveal-card reveal-ticket"><span>CELEBRATE WITH US</span><b>AMR &amp; MARIAM</b><small>3 OCTOBER 2026</small></div>
+      <div className="venue-ticket reveal-card reveal-ticket"><span>CELEBRATE WITH US</span><b>AMRO &amp; MARIAM</b><small>3 OCTOBER 2026</small></div>
     </div>
   </div>;
 }
@@ -82,16 +82,23 @@ function getCountdown() {
 }
 
 function Countdown() {
-  const [remaining, setRemaining] = useState(getCountdown);
+  const [remaining, setRemaining] = useState<ReturnType<typeof getCountdown> | null>(null);
 
   useEffect(() => {
-    setRemaining(getCountdown());
-    const timer = window.setInterval(() => setRemaining(getCountdown()), 1000);
-    return () => window.clearInterval(timer);
+    const update = () => setRemaining(getCountdown());
+    update();
+    const timer = window.setInterval(update, 1000);
+    window.addEventListener("pageshow", update);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("pageshow", update);
+      document.removeEventListener("visibilitychange", update);
+    };
   }, []);
 
   return <div className="countdown reveal-card" role="timer" aria-live="off" aria-label="Countdown to October 3, 2026">
-    {Object.entries(remaining).map(([label, value]) => <div className="countdown-unit" key={label}><b suppressHydrationWarning>{String(value).padStart(2, "0")}</b><span>{label}</span></div>)}
+    {(["days", "hours", "minutes", "seconds"] as const).map((label) => <div className="countdown-unit" key={label}><b>{remaining === null ? "--" : String(remaining[label]).padStart(2, "0")}</b><span>{label}</span></div>)}
   </div>;
 }
 
@@ -109,21 +116,21 @@ export default function Home() {
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
     >
     <section className="date-section section-paper">
-      <div className="engagement-heading"><p className="eyebrow">SAVE THE DATE</p><h1>Our Engagement</h1><p>Amr <span>&amp;</span> Mariam</p></div>
+      <div className="engagement-heading"><p className="eyebrow">SAVE THE DATE</p><h1>Our Engagement</h1><p>Amro <span>&amp;</span> Mariam</p></div>
       <InvitationStationery />
     </section>
 
     <section className="details section-paper">
       <div className="details-title reveal-card reveal-details-title"><p className="eyebrow">THE ENGAGEMENT DAY</p><h2>Counting Down</h2><p>Until we celebrate together</p></div>
       <Countdown />
-      <div className="countdown-location reveal-card"><span><MapPin /></span><div><small>THE LOCATION</small><b>Louvre Heights</b><p>New Cairo</p></div></div>
+      <div className="countdown-location reveal-card"><span><MapPin /></span><div><small>THE LOCATION</small><b>Sunset</b><p>New Cairo</p></div></div>
       <div className="map-embed reveal-card reveal-map">
-        <iframe title="Louvre Heights location map" src="https://www.google.com/maps?q=30.016664,31.490468&z=17&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
-        <a href="https://www.google.com/maps/place/Louvre+Heights/@30.016664,31.4878931,17z/data=!3m1!4b1!4m6!3m5!1s0x145822f86d24af37:0xa09375d53b76ee1b!8m2!3d30.016664!4d31.490468!16s%2Fg%2F11g8w1z1w4?hl=en&entry=ttu" target="_blank" rel="noreferrer">Louvre Heights <span>↗</span></a>
+        <iframe title="Sunset location map" src="https://www.google.com/maps?q=30.016664,31.490468&z=17&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+        <a href="https://www.google.com/maps/place/Louvre+Heights/@30.016664,31.4878931,17z/data=!3m1!4b1!4m6!3m5!1s0x145822f86d24af37:0xa09375d53b76ee1b!8m2!3d30.016664!4d31.490468!16s%2Fg%2F11g8w1z1w4?hl=en&entry=ttu" target="_blank" rel="noreferrer">Sunset <span>↗</span></a>
       </div>
     </section>
 
-    <footer><Monogram small first="A" second="M"/><div className="footer-script">Amr &amp; Mariam</div><p>OCTOBER 3, 2026</p></footer>
+    <footer><Monogram small first="A" second="M"/><div className="footer-script">Amro &amp; Mariam</div><p>OCTOBER 3, 2026</p></footer>
     </motion.div>
   </main>;
 }
